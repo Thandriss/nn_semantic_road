@@ -1,0 +1,41 @@
+DATASETS:
+  CALCULATE_CLASS_WEIGHTS: False
+  TEST:
+    ROOT_DIR: ['C:/Users/mahon/dip_project/land-analyzer-model-master/data/outputs/valid/']
+  TRAIN:
+    ROOT_DIR: ['C:/Users/mahon/dip_project/land-analyzer-model-master/data/outputs/train/']
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+INPUT:
+  IMAGE_SIZE: [512, 512]
+  PIXEL_MEAN: [123, 117, 104]
+  PIXEL_STD: [58, 57, 57]
+MODEL:
+  BACKBONE:
+    FREEZE: False
+    NAME: YOLOs
+    PRETRAINED: True
+  DEVICE: cuda
+  HEAD:
+    CLASS_LABELS: ['background', 'road']
+    DROPOUT: 0.5
+    FREEZE: False
+    HIDDEN_DEPTH: 64
+    INPUT_DEPTH: [64, 128, 256, 384]
+    NAME: DeepLabV3_Custom
+    PRETRAINED: True
+  META_ARCHITECTURE: MulticlassSegmentator
+OUTPUT_DIR: outputs/test
+SOLVER:
+  BATCH_SIZE: 4
+  LR: 0.001
+  LR_LAMBDA: 0.95
+  MAX_ITER: 2048
+  TYPE: Adam
+TENSORBOARD:
+  BEST_SAMPLES_NUM: 32
+  METRICS_BIN_THRESHOLD: 0.85
+  WORST_SAMPLES_NUM: 32
+TEST:
+  BATCH_SIZE: 4
